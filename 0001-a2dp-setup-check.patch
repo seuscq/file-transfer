@@ -1,0 +1,26 @@
+From f7077febe6a2909b71e52c137713ae52e3a926ef Mon Sep 17 00:00:00 2001
+From: robert_sun <robert_sun@realsil.com.cn>
+Date: Mon, 8 Apr 2019 19:18:24 +0800
+Subject: [PATCH] a2dp setup check
+
+---
+ profiles/audio/a2dp.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/profiles/audio/a2dp.c b/profiles/audio/a2dp.c
+index b0fea7c..421adf8 100644
+--- a/profiles/audio/a2dp.c
++++ b/profiles/audio/a2dp.c
+@@ -158,6 +158,9 @@ static void setup_free(struct a2dp_setup *s)
+ {
+ 	DBG("%p", s);
+ 
++	if(!g_slist_find(setups, s)) 
++		return;
++
+ 	setups = g_slist_remove(setups, s);
+ 	if (s->session)
+ 		avdtp_unref(s->session);
+-- 
+2.21.0
+
